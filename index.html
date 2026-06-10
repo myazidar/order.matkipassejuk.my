@@ -1,1 +1,195 @@
-/httpdocs
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MKS Long-Term Rental Calculator</title>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background:#f5f5f5;
+    padding:20px;
+    max-width:800px;
+    margin:auto;
+}
+
+.card{
+    background:white;
+    padding:20px;
+    border-radius:12px;
+    box-shadow:0 2px 10px rgba(0,0,0,0.1);
+}
+
+h1{
+    text-align:center;
+}
+
+label{
+    display:block;
+    margin-top:15px;
+    font-weight:bold;
+}
+
+input{
+    width:100%;
+    padding:10px;
+    margin-top:5px;
+    box-sizing:border-box;
+}
+
+button{
+    margin-top:15px;
+    padding:12px 20px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:16px;
+}
+
+.btn-primary{
+    background:#007bff;
+    color:white;
+}
+
+.btn-success{
+    background:#28a745;
+    color:white;
+}
+
+.btn-whatsapp{
+    background:#25D366;
+    color:white;
+}
+
+.result{
+    margin-top:20px;
+    padding:15px;
+    background:#f0f8ff;
+    border-radius:8px;
+}
+
+textarea{
+    width:100%;
+    height:220px;
+    margin-top:10px;
+    padding:10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+<h1>MKS Long-Term Rental Calculator</h1>
+
+<label>Nama Customer</label>
+<input type="text" id="customer">
+
+<label>Jumlah Hari Sewa</label>
+<input type="number" id="days">
+
+<label>Jumlah Bayaran Customer (RM)</label>
+<input type="number" id="rental">
+
+<label>Kos Transport (RM)</label>
+<input type="number" id="transport" value="0">
+
+<button class="btn-primary" onclick="calculate()">
+Kira
+</button>
+
+<div id="output"></div>
+
+</div>
+
+<script>
+
+function calculate(){
+
+let customer = document.getElementById('customer').value;
+let days = Number(document.getElementById('days').value);
+let rental = Number(document.getElementById('rental').value);
+let transport = Number(document.getElementById('transport').value);
+
+if(days < 1){
+    alert("Masukkan jumlah hari yang sah");
+    return;
+}
+
+let companyShare = 45 + ((days - 1) * 5);
+
+let commission = rental - companyShare - transport;
+
+let whatsappText =
+`📋 MKS LONG TERM RENTAL
+
+Customer : ${customer}
+Tempoh Sewa : ${days} hari
+
+💰 Jumlah Bayaran Customer
+RM ${rental.toFixed(2)}
+
+🏢 Share Syarikat
+RM ${companyShare.toFixed(2)}
+
+🚚 Kos Transport
+RM ${transport.toFixed(2)}
+
+💵 Komisyen / Baki Team
+RM ${commission.toFixed(2)}
+`;
+
+document.getElementById('output').innerHTML = `
+<div class="result">
+
+<h3>Breakdown</h3>
+
+<p><strong>Share Syarikat:</strong> RM ${companyShare.toFixed(2)}</p>
+<p><strong>Kos Transport:</strong> RM ${transport.toFixed(2)}</p>
+<p><strong>Komisyen:</strong> RM ${commission.toFixed(2)}</p>
+
+<textarea id="copyText">${whatsappText}</textarea>
+
+<button class="btn-success" onclick="copyText()">
+📋 Copy Text
+</button>
+
+<button class="btn-whatsapp"
+onclick="sendWhatsapp()">
+📱 WhatsApp
+</button>
+
+</div>
+`;
+
+}
+
+function copyText(){
+
+let copyText = document.getElementById("copyText");
+
+copyText.select();
+copyText.setSelectionRange(0,99999);
+
+navigator.clipboard.writeText(copyText.value);
+
+alert("Copied!");
+}
+
+function sendWhatsapp(){
+
+let text = document.getElementById("copyText").value;
+
+window.open(
+"https://wa.me/?text=" + encodeURIComponent(text),
+"_blank"
+);
+
+}
+
+</script>
+
+</body>
+</html>
