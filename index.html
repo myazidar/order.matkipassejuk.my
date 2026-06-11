@@ -357,6 +357,7 @@ www.matkipassejuk.my
       <textarea id="customerText">${customerText}</textarea>
       <button class="btn-copy" onclick="copyText('customerText')">📋 Copy Quote</button>
       <button class="btn-wa" onclick="sendWhatsappToCustomer('customerText')">📱 WhatsApp Customer</button>
+      <button class="btn-primary" onclick="printQuotation()">🖨️ Print Quotation</button>
     </div>
   `;
 }
@@ -391,6 +392,10 @@ function sendWhatsappToCustomer(id) {
 
 function toggleDarkMode() {
   document.body.classList.toggle("dark");
+}
+
+function printQuotation() {
+    alert("Print quotation coming soon");
 }
 </script>
 
