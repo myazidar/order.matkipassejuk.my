@@ -6,7 +6,7 @@
   <title>MKS Rental Calculator</title>
   <style>
     :root {
-      --bg: #f4f4f4;
+      --bg: #96E2EA;
       --card: #ffffff;
       --text: #111111;
       --muted: #666666;
@@ -236,7 +236,7 @@ function calculate() {
     return;
   }
 
-  const companySharePerUnit = 45 + ((days - 1) * 5);
+  const companySharePerUnit = rental * (30/100) //45 + ((days - 1) * 5);
   const companyShareTotal = companySharePerUnit * unit;
   const commission = rental - companyShareTotal - transport;
   const balance = rental - deposit;
