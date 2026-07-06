@@ -115,7 +115,7 @@ font-size: 14px;
 <input type="text" id="quoteNo" readonly>
  
 <label>Nama Customer</label>
-<input text="text" id="customerName" placeholder="Contoh: Restoran XYZ">
+<input type="text" id="customerName" placeholder="Contoh: Restoran XYZ">
  
 <label>No Telefon Customer</label>
 <input type="text" id="phone" placeholder="Contoh: 012-3456789">
@@ -526,6 +526,16 @@ body { font-family: 'DM Sans', sans-serif; background: #f1f5f9; padding: 24px; c
 <div class="flex justify-between border-t-2 border-blue-200 pt-3"><span class="font-bold text-blue-900">Grand Total</span><span class="font-bold text-blue-900">RM ` + grandTotal.toFixed(2) + `</span></div>
 </div>
 </div>
+ 
+<div class="mb-8 p-5 bg-blue-50/60 rounded-xl border border-blue-100">
+<h3 class="font-bold text-blue-900 text-sm tracking-wide uppercase mb-2">📌 Arahan & Terma Tempahan (Booking Instruction):</h3>
+<ul class="text-sm text-gray-700 space-y-1.5 list-disc pl-5">
+<li>Bayaran deposit komitmen sebanyak <strong class="text-blue-900">RM 50.00</strong> diperlukan untuk mengunci (lock) tarikh slot sewaan anda.</li>
+<li>Slot tarikh sewaan hanya akan disahkan (secured) sepenuhnya selepas bukti pembayaran diterima oleh pihak kami.</li>
+<li>Baki bayaran sewaan penuh hendaklah dijelaskan sebelum atau semasa proses penghantaran dan pemasangan unit dilakukan.</li>
+</ul>
+</div>
+ 
 <footer class="border-t border-gray-100 pt-6">
 <p class="font-medium mb-1 text-gray-700">Payment Details</p>
 <p class="text-gray-600">Payment can be made via bank transfer / cash / agreed payment method.</p>
