@@ -115,7 +115,7 @@ font-size: 14px;
 <input type="text" id="quoteNo" readonly>
  
 <label>Nama Customer</label>
-<input type="text" id="customerName" placeholder="Contoh: Restoran XYZ">
+<input text="text" id="customerName" placeholder="Contoh: Restoran XYZ">
  
 <label>No Telefon Customer</label>
 <input type="text" id="phone" placeholder="Contoh: 012-3456789">
@@ -436,6 +436,8 @@ const unit = Number(document.getElementById("unit").value || 0);
 const days = Number(document.getElementById("days").value || 0);
 const startDate = document.getElementById("startDate").value;
 const rental = Number(document.getElementById("rental").value || 0);
+const transport = Number(document.getElementById("transport").value || 0);
+const grandTotal = rental + transport;
  
 const today = new Date().toLocaleDateString("ms-MY", { day: "2-digit", month: "2-digit", year: "numeric" });
 const startDateText = startDate ? new Date(startDate).toLocaleDateString("ms-MY", { day: "2-digit", month: "2-digit", year: "numeric" }) : "-";
@@ -509,11 +511,19 @@ body { font-family: 'DM Sans', sans-serif; background: #f1f5f9; padding: 24px; c
 <td class="py-4 px-2 text-right text-gray-800">` + days + ` hari</td>
 <td class="py-4 px-2 text-right text-gray-800">RM ` + rental.toFixed(2) + `</td>
 </tr>
+<tr class="border-b border-gray-200">
+<td class="py-4 px-2 text-gray-800">Kos Transport / Penghantaran & Pemasangan</td>
+<td class="py-4 px-2 text-center text-gray-800">1</td>
+<td class="py-4 px-2 text-right text-gray-800">-</td>
+<td class="py-4 px-2 text-right text-gray-800">RM ` + transport.toFixed(2) + `</td>
+</tr>
 </tbody>
 </table>
 <div class="flex justify-end mb-8">
 <div class="w-72 space-y-3 total-box p-6 rounded-lg">
-<div class="flex justify-between"><span class="text-gray-600">Total Rental</span><span class="font-semibold">RM ` + rental.toFixed(2) + `</span></div>
+<div class="flex justify-between"><span class="text-gray-600">Total Rental</span><span class="font-medium">RM ` + rental.toFixed(2) + `</span></div>
+<div class="flex justify-between"><span class="text-gray-600">Transport Cost</span><span class="font-medium">RM ` + transport.toFixed(2) + `</span></div>
+<div class="flex justify-between border-t-2 border-blue-200 pt-3"><span class="font-bold text-blue-900">Grand Total</span><span class="font-bold text-blue-900">RM ` + grandTotal.toFixed(2) + `</span></div>
 </div>
 </div>
 <footer class="border-t border-gray-100 pt-6">
@@ -543,8 +553,10 @@ const unit = Number(document.getElementById("unit").value || 0);
 const days = Number(document.getElementById("days").value || 0);
 const startDate = document.getElementById("startDate").value;
 const rental = Number(document.getElementById("rental").value || 0);
+const transport = Number(document.getElementById("transport").value || 0);
 const deposit = Number(document.getElementById("deposit").value || 0);
-const balance = rental - deposit;
+const grandTotal = rental + transport;
+const balance = grandTotal - deposit;
  
 const today = new Date().toLocaleDateString("ms-MY", { day: "2-digit", month: "2-digit", year: "numeric" });
 const startDateText = startDate ? new Date(startDate).toLocaleDateString("ms-MY", { day: "2-digit", month: "2-digit", year: "numeric" }) : "-";
@@ -618,13 +630,21 @@ body { font-family: 'DM Sans', sans-serif; background: #f1f5f9; padding: 24px; c
 <td class="py-4 px-2 text-right text-gray-800">` + days + ` hari</td>
 <td class="py-4 px-2 text-right text-gray-800">RM ` + rental.toFixed(2) + `</td>
 </tr>
+<tr class="border-b border-gray-200">
+<td class="py-4 px-2 text-gray-800">Kos Transport / Penghantaran & Pemasangan</td>
+<td class="py-4 px-2 text-center text-gray-800">1</td>
+<td class="py-4 px-2 text-right text-gray-800">-</td>
+<td class="py-4 px-2 text-right text-gray-800">RM ` + transport.toFixed(2) + `</td>
+</tr>
 </tbody>
 </table>
 <div class="flex justify-end mb-8">
 <div class="w-72 space-y-3 total-box p-6 rounded-lg">
-<div class="flex justify-between"><span class="text-gray-600">Subtotal</span><span class="font-semibold">RM ` + rental.toFixed(2) + `</span></div>
-<div class="flex justify-between"><span class="text-gray-600">Deposit</span><span class="font-semibold">RM ` + deposit.toFixed(2) + `</span></div>
-<div class="flex justify-between border-t-2 border-blue-200 pt-3"><span class="font-bold text-blue-900">Balance</span><span class="font-bold text-blue-900">RM ` + balance.toFixed(2) + `</span></div>
+<div class="flex justify-between"><span class="text-gray-600">Subtotal Rental</span><span class="font-semibold">RM ` + rental.toFixed(2) + `</span></div>
+<div class="flex justify-between"><span class="text-gray-600">Transport Cost</span><span class="font-semibold">RM ` + transport.toFixed(2) + `</span></div>
+<div class="flex justify-between border-t border-gray-200 pt-1"><span class="text-gray-600 font-medium">Grand Total</span><span class="font-semibold">RM ` + grandTotal.toFixed(2) + `</span></div>
+<div class="flex justify-between"><span class="text-gray-600">Deposit Paid</span><span class="font-semibold">RM ` + deposit.toFixed(2) + `</span></div>
+<div class="flex justify-between border-t-2 border-blue-200 pt-3"><span class="font-bold text-blue-900">Balance Due</span><span class="font-bold text-blue-900">RM ` + balance.toFixed(2) + `</span></div>
 </div>
 </div>
 <footer class="border-t border-gray-100 pt-6">
@@ -654,6 +674,7 @@ const unit = Number(document.getElementById("unit").value || 0);
 const days = Number(document.getElementById("days").value || 0);
 const startDate = document.getElementById("startDate").value;
 const rental = Number(document.getElementById("rental").value || 0);
+const transport = Number(document.getElementById("transport").value || 0);
 const deposit = Number(document.getElementById("deposit").value || 0);
  
 const today = new Date().toLocaleDateString("ms-MY", { day: "2-digit", month: "2-digit", year: "numeric" });
@@ -728,11 +749,17 @@ body { font-family: 'DM Sans', sans-serif; background: #f1f5f9; padding: 24px; c
 <td class="py-4 px-2 text-right text-gray-800">` + days + ` hari</td>
 <td class="py-4 px-2 text-right text-gray-800">RM ` + rental.toFixed(2) + `</td>
 </tr>
+<tr class="border-b border-gray-200">
+<td class="py-4 px-2 text-gray-800">Kos Transport / Penghantaran & Pemasangan</td>
+<td class="py-4 px-2 text-center text-gray-800">1</td>
+<td class="py-4 px-2 text-right text-gray-800">-</td>
+<td class="py-4 px-2 text-right text-gray-800">RM ` + transport.toFixed(2) + `</td>
+</tr>
 </tbody>
 </table>
 <div class="flex justify-end mb-8">
 <div class="w-72 space-y-3 total-box p-6 rounded-lg">
-<div class="flex justify-between border-t-2 border-blue-200 pt-3"><span class="font-bold text-blue-900">Amount Received</span><span class="font-bold text-blue-900">RM ` + deposit.toFixed(2) + `</span></div>
+<div class="flex justify-between border-t-2 border-blue-200 pt-3"><span class="font-bold text-blue-900">Amount Received (Deposit)</span><span class="font-bold text-blue-900">RM ` + deposit.toFixed(2) + `</span></div>
 </div>
 </div>
 <footer class="border-t border-gray-100 pt-6">
