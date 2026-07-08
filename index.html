@@ -6,138 +6,183 @@
 <title>MKS Rental Calculator</title>
 <style>
 :root {
---bg: #96E2EA;
+--bg: #e0f4f6;
 --card: #ffffff;
---text: #111111;
---muted: #666666;
---border: #dddddd;
---blue: #007bff;
---green: #28a745;
---wa: #25D366;
---warning: #fff3cd;
+--text: #1f2937;
+--muted: #4b5563;
+--border: #e5e7eb;
+--blue: #2563eb;
+--green: #16a34a;
+--wa: #22c55e;
+--warning: #fef3c7;
+--accent: #0284c7;
 }
  
 body.dark {
 --bg: #111827;
 --card: #1f2937;
 --text: #f9fafb;
---muted: #d1d5db;
+--muted: #9ca3af;
 --border: #374151;
---warning: #4b3b12;
+--warning: #78350f;
 }
  
 body {
-font-family: Arial, sans-serif;
+font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
 background: var(--bg);
 color: var(--text);
-padding: 20px;
+padding: 24px 16px;
 margin: auto;
 display: flex;
 flex-direction: column;
 align-items: center;
+line-height: 1.5;
 }
 
-/* UI Fix: Constrain the layout so it doesn't stretch infinitely on wide screens */
 .app-container {
 width: 100%;
-max-width: 650px; 
+max-width: 600px; 
 box-sizing: border-box;
 }
  
 .card {
 background: var(--card);
-padding: 20px;
-border-radius: 14px;
-box-shadow: 0 3px 12px rgba(0,0,0,0.12);
+padding: 24px;
+border-radius: 16px;
+box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
 margin-bottom: 20px;
+border: 1px solid var(--border);
 }
  
 label {
 display: block;
-margin-top: 12px;
-font-weight: bold;
-}
- 
-input, textarea {
-width: 100%;
-padding: 11px;
-margin-top: 5px;
-box-sizing: border-box;
-border: 1px solid var(--border);
-border-radius: 8px;
-font-size: 15px;
-background: var(--card);
+margin-top: 14px;
+font-weight: 600;
+font-size: 14px;
 color: var(--text);
 }
  
+input, textarea, select {
+width: 100%;
+padding: 12px;
+margin-top: 6px;
+box-sizing: border-box;
+border: 1px solid var(--border);
+border-radius: 10px;
+font-size: 15px;
+background: var(--card);
+color: var(--text);
+transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+input:focus, textarea:focus, select:focus {
+outline: none;
+border-color: var(--blue);
+box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+ 
 textarea {
-min-height: 120px;
+min-height: 100px;
 white-space: pre-wrap;
+resize: vertical;
 }
  
 button {
-padding: 12px 18px;
+padding: 12px 20px;
 margin-top: 12px;
-margin-right: 6px;
+margin-right: 4px;
 border: none;
-border-radius: 8px;
+border-radius: 10px;
 cursor: pointer;
 font-size: 15px;
-font-weight: bold;
-transition: opacity 0.2s;
+font-weight: 600;
+transition: all 0.2s ease;
+display: inline-flex;
+align-items: center;
+justify-content: center;
+gap: 8px;
 }
 
 button:hover {
-opacity: 0.9;
+opacity: 0.95;
+transform: translateY(-1px);
+}
+
+button:active {
+transform: translateY(0);
 }
  
 .btn-primary { background: var(--blue); color: #fff; }
-.btn-copy { background: var(--green); color: #fff; }
+.btn-copy { background: #4b5563; color: #fff; }
 .btn-wa { background: var(--wa); color: #fff; }
 .btn-dark { background: #374151; color: #fff; }
+.btn-success { background: var(--green); color: #fff; }
  
 .summary {
-background: rgba(0,123,255,0.12);
-padding: 15px;
-border-radius: 10px;
-margin-top: 15px;
+background: rgba(37, 99, 235, 0.06);
+padding: 18px;
+border-radius: 12px;
+margin-top: 16px;
+border: 1px solid rgba(37, 99, 235, 0.1);
+}
+
+.summary p {
+margin: 8px 0;
+display: flex;
+justify-content: space-between;
 }
  
 .warning {
 background: var(--warning);
-padding: 12px;
-border-radius: 8px;
-margin-top: 12px;
-font-weight: bold;
+padding: 14px;
+border-radius: 10px;
+margin-top: 14px;
+font-weight: 600;
+font-size: 14px;
+border-left: 4px solid #d97706;
 }
  
 .small {
 color: var(--muted);
-font-size: 14px;
+font-size: 13px;
+margin-top: 6px;
 }
 
 .flex-row {
 display: flex;
-gap: 10px;
+gap: 12px;
 }
 .flex-row div {
 flex: 1;
 }
+
+h1 { font-size: 24px; font-weight: 700; margin: 0; color: var(--blue); }
+h2 { font-size: 18px; font-weight: 700; margin: 0 0 16px 0; }
 </style>
 </head>
  
 <body>
 
 <div class="app-container">
-<div class="card">
-<div style="display: flex; justify-content: space-between; align-items: center;">
-<h1>Mat Kipas Sejuk</h1>
-<button class="btn-dark" style="margin:0;" onclick="toggleDarkMode()">🌙 Mode</button>
+<div class="card" style="border: 2px solid var(--blue); background: rgba(37, 99, 235, 0.02);">
+  <h2>🔍 Carian Rekod Lama</h2>
+  <div style="display: flex; gap: 8px;">
+    <input type="text" id="searchQt" placeholder="Masukkan QT No Penuh (Contoh: QT-20260708-123)" style="margin-top:0; flex: 2;">
+    <button class="btn-primary" style="margin-top:0; flex: 1; background: #4f46e5;" onclick="searchRecord()">Cari Job</button>
+  </div>
 </div>
-<h2>Rental Calculator</h2>
+
+<div class="card">
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+<div>
+  <h1>Mat Kipas Sejuk</h1>
+  <p class="small" style="margin:0;">Rental Calculator v2.2</p>
+</div>
+<button class="btn-dark" style="margin:0; padding: 8px 14px; font-size: 13px;" onclick="toggleDarkMode()">🌙 Mode</button>
+</div>
  
 <label>Quotation No</label>
-<input type="text" id="quoteNo" readonly>
+<input type="text" id="quoteNo" readonly style="background: rgba(0,0,0,0.03); font-weight: bold; color: var(--muted);">
  
 <label>Nama Customer</label>
 <input type="text" id="customerName" placeholder="Contoh: Restoran XYZ" oninput="saveToMemory()">
@@ -165,9 +210,9 @@ flex: 1;
 <label>Tarikh Mula Sewaan</label>
 <input type="date" id="startDate" onchange="updateEndDatePreview(); saveToMemory();">
  
-<p class="small"><strong>Tarikh Tamat:</strong> <span id="endDatePreview">-</span></p>
+<p class="small"><strong>Tarikh Tamat:</strong> <span id="endDatePreview" style="color: var(--blue); font-weight: bold;">-</span></p>
  
-<label>Jumlah Bayaran Customer (RM)</label>
+<label>Jumlah Bayaran Customer Asal (RM)</label>
 <input type="number" id="rental" placeholder="Contoh: 600" oninput="saveToMemory()">
  
 <div class="flex-row">
@@ -180,10 +225,16 @@ flex: 1;
 <input type="number" id="transport" value="0" oninput="saveToMemory()">
 </div>
 </div>
+
+<label>Tanggungan Kos Transport</label>
+<select id="transportType" onchange="calculate(); saveToMemory();">
+  <option value="tambah">Customer Tambah (Caj Tambahan Luar Harga Sewa)</option>
+  <option value="absorb">Syarikat Absorb (Tolak dari Komisyen Team)</option>
+</select>
  
-<div style="display:flex; gap: 8px;">
-<button class="btn-primary" style="flex: 2;" onclick="calculate()">Kira & Generate Text</button>
-<button class="btn-dark" style="flex: 1; background: #6b7280;" onclick="clearMemory()">Reset</button>
+<div style="display:flex; gap: 10px; margin-top: 16px;">
+<button class="btn-primary" style="flex: 2; margin: 0;" onclick="isSearchedFromDb = false; calculate()">Kira & Generate Text</button>
+<button class="btn-dark" style="flex: 1; background: #6b7280; margin: 0;" onclick="clearMemory()">Reset</button>
 </div>
 </div>
  
@@ -195,6 +246,8 @@ flex: 1;
 const STORAGE_KEY = "MKS_CALCULATOR_DATA";
 const WEBAPP_URL = "https://script.google.com/macros/s/AKfycbwLtMUSkyaJhgt11W4xdo6KJXSeb2L3sW0GHN_mKa-xSO7MvJwzPKcQSy6jyX7K4_I/exec";
 
+let isSearchedFromDb = false;
+
 function generateDocNo(prefix) {
 const now = new Date();
 const y = now.getFullYear();
@@ -204,7 +257,6 @@ const random = String(Math.floor(Math.random() * 999) + 1).padStart(3, "0");
 return prefix + "-" + y + m + d + "-" + random;
 }
 
-// LocalStorage Persistence
 function saveToMemory() {
 const data = {
 customerName: document.getElementById("customerName").value,
@@ -217,6 +269,7 @@ startDate: document.getElementById("startDate").value,
 rental: document.getElementById("rental").value,
 deposit: document.getElementById("deposit").value,
 transport: document.getElementById("transport").value,
+transportType: document.getElementById("transportType").value,
 quoteNo: document.getElementById("quoteNo").value
 };
 localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
@@ -236,6 +289,7 @@ document.getElementById("startDate").value = data.startDate || "";
 document.getElementById("rental").value = data.rental || "";
 document.getElementById("deposit").value = data.deposit || 0;
 document.getElementById("transport").value = data.transport || 0;
+document.getElementById("transportType").value = data.transportType || "tambah";
 document.getElementById("quoteNo").value = data.quoteNo || generateDocNo("QT");
 updateEndDatePreview();
 } else {
@@ -250,7 +304,6 @@ location.reload();
 }
 }
 
-// Initialization
 window.onload = function() {
 loadFromMemory();
 };
@@ -299,16 +352,32 @@ const startDate = document.getElementById("startDate").value;
 const rental = Number(document.getElementById("rental").value);
 const deposit = Number(document.getElementById("deposit").value);
 const transport = Number(document.getElementById("transport").value);
+const transportType = document.getElementById("transportType").value;
  
 if (unit < 1 || days < 1 || rental < 0) {
 alert("Sila semak bilangan unit, hari sewa dan jumlah bayaran.");
 return;
 }
  
-const companySharePerUnit = rental * (30/100);
-const companyShareTotal = companySharePerUnit * unit;
-const commission = rental - companyShareTotal - transport;
-const balance = rental - deposit;
+// LOGIK BARU: Share Syarikat 30% daripada jumlah asal customer bayar
+const companyShareTotal = rental * 0.30; 
+
+// Pelarasan Jumlah Yang Perlu Dibayar oleh Customer mengikut jenis transport
+let totalCustomerPay = rental;
+if (transportType === "tambah") {
+  totalCustomerPay = rental + transport;
+}
+
+// LOGIK BARU: Jumlah cust bayar - deposit = baki bayaran
+const balance = totalCustomerPay - deposit;
+ 
+// LOGIK BARU: Pengiraan Komisyen Team berdasarkan tanggungan transport
+let commission = 0;
+if (transportType === "tambah") {
+  commission = rental - companyShareTotal; // Transport dibayar lebih oleh cust, jadi komisyen tak terusik
+} else {
+  commission = rental - companyShareTotal - transport; // Ditandakan tolak dari komisyen team
+}
  
 const startDateText = formatDate(startDate);
 const endDateText = calculateEndDate(startDate, days);
@@ -324,11 +393,11 @@ const internalText =
 `Tempoh Sewa : ${days} hari\n` +
 `Tarikh Mula : ${startDateText}\n` +
 `Tarikh Tamat : ${endDateText}\n\n` +
-`💰 Jumlah Bayaran Customer\n${formatRM(rental)}\n\n` +
+`💰 Jumlah Bayaran Customer (Total)\n${formatRM(totalCustomerPay)}\n` +
+`(Harga Asal: ${formatRM(rental)} | Transport: ${formatRM(transport)} [${transportType === 'tambah' ? 'Daj ke Cust' : 'Absorb Syarikat'}])\n\n` +
 `💳 Deposit Diterima\n${formatRM(deposit)}\n\n` +
 `🧾 Baki Bayaran Customer\n${formatRM(balance)}\n\n` +
-`🏢 Share Syarikat\n${formatRM(companyShareTotal)}\n` +
-`(${formatRM(companySharePerUnit)} x ${unit} unit)\n\n` +
+`🏢 Share Syarikat (30%)\n${formatRM(companyShareTotal)}\n\n` +
 `🚚 Kos Transport\n${formatRM(transport)}\n\n` +
 `💵 Komisyen / Baki Team\n${formatRM(commission)}\n`;
  
@@ -343,13 +412,13 @@ const customerText =
 `📅 Tempoh Sewaan : ${days} hari\n` +
 `🗓️ Tarikh Mula : ${startDateText}\n` +
 `🗓️ Tarikh Tamat : ${endDateText}\n\n` +
-`💰 Jumlah Sewaan\n${formatRM(rental)}\n\n` +
+`💰 Jumlah Sewaan\n${formatRM(totalCustomerPay)}\n\n` +
 `💳 Deposit\n${formatRM(deposit)}\n\n` +
 `🧾 Baki Bayaran\n${formatRM(balance)}\n\n` +
 `Harga termasuk:\n` +
 `✅ Sewaan Aircooler Gergasi\n` +
 `✅ Bantuan pemasangan\n` +
-`✅ Delivery\n\n` +
+`✅ Delivery ${transportType === 'absorb' ? '(Percuma)' : ''}\n\n` +
 `Terima kasih kerana memilih Mat Kipas Sejuk.\n\n` +
 `www.matkipassejuk.my\n`;
  
@@ -357,22 +426,34 @@ let warning = "";
 if (commission < 0) warning += `<div class="warning">⚠️ Komisyen negatif. Sila semak harga sewaan atau kos transport.</div>`;
 if (balance < 0) warning += `<div class="warning">⚠️ Deposit lebih tinggi daripada jumlah sewaan. Sila semak semula.</div>`;
  
+let conditionalButtonsHTML = "";
+if (isSearchedFromDb) {
+  conditionalButtonsHTML = `
+  <div style="display: flex; gap: 8px; margin-top: 14px; border-top: 1px dashed var(--border); padding-top: 14px;">
+    <button class="btn-primary" style="flex:1; background:#4f46e5; margin:0;" onclick="printDocument('INV')">🧾 Print Invoice</button>
+    <button class="btn-primary" style="flex:1; background:#0891b2; margin:0;" onclick="printDocument('RCPT')">💵 Print Receipt</button>
+  </div>
+  `;
+}
+
 document.getElementById("result").innerHTML = `
 <div class="card">
 <h2>Ringkasan Kiraan</h2>
  
 <div class="summary">
-<p><strong>Jumlah Bayaran Customer:</strong> ` + formatRM(rental) + `</p>
-<p><strong>Deposit:</strong> ` + formatRM(deposit) + `</p>
-<p><strong>Baki Bayaran:</strong> ` + formatRM(balance) + `</p>
-<p><strong>Share Syarikat:</strong> ` + formatRM(companyShareTotal) + `</p>
-<p><strong>Kos Transport:</strong> ` + formatRM(transport) + `</p>
-<p><strong>Komisyen / Baki Team:</strong> ` + formatRM(commission) + `</p>
+<p><span>Jumlah Sewaan Asas:</span> <strong>` + formatRM(rental) + `</strong></p>
+<p><span>Kos Transport (` + (transportType === 'tambah' ? 'Cust' : 'Absorb') + `):</span> <strong>` + formatRM(transport) + `</strong></p>
+<p><span>Jumlah Perlu Bayar (Cust):</span> <strong style="color:var(--blue)">` + formatRM(totalCustomerPay) + `</strong></p>
+<p><span>Deposit Diterima:</span> <strong>` + formatRM(deposit) + `</strong></p>
+<p><span>Baki Bayaran (Cust):</span> <strong>` + formatRM(balance) + `</strong></p>
+<p><span>Share Syarikat (30%):</span> <strong>` + formatRM(companyShareTotal) + `</strong></p>
+<p><span>Komisyen / Baki Team:</span> <strong style="color:var(--green)">` + formatRM(commission) + `</strong></p>
 </div>
  
-<button class="btn-primary" style="width:100%; margin-top:15px;" onclick="saveRecord()">
-💾 Save Job to Google Sheet
-</button>
+<div class="flex-row" style="margin-top:15px;">
+  <button class="btn-success" style="flex: 1.2; margin:0;" onclick="saveRecord()">💾 Save Job</button>
+  <button class="btn-primary" style="flex: 1; margin:0; background: #0284c7;" onclick="printDocument('QT')">🖨️ Quotation</button>
+</div>
  
 ` + warning + `
 </div>
@@ -380,20 +461,20 @@ document.getElementById("result").innerHTML = `
 <div class="card">
 <h2>Copy Text #1 - Internal MKS</h2>
 <textarea id="internalText"></textarea>
-<button class="btn-copy" onclick="copyText('internalText')">📋 Copy Internal</button>
-<button class="btn-wa" onclick="sendWhatsapp('internalText')">📱 WhatsApp Internal</button>
+<div style="display:flex; gap:6px;">
+  <button class="btn-copy" style="flex:1;" onclick="copyText('internalText')">📋 Copy Internal</button>
+  <button class="btn-wa" style="flex:1;" onclick="sendWhatsapp('internalText')">📱 WhatsApp</button>
+</div>
 </div>
  
 <div class="card">
 <h2>Copy Text #2 - Quote Customer</h2>
 <textarea id="customerText"></textarea>
-<button class="btn-copy" onclick="copyText('customerText')">📋 Copy Quote</button>
-<button class="btn-wa" onclick="sendWhatsappToCustomer('customerText')">📱 WhatsApp Customer</button>
-<div style="display: flex; gap: 4px; margin-top:8px; flex-wrap: wrap;">
-<button class="btn-primary" style="flex:1;" onclick="printDocument('QT')">🖨️ Print Quotation</button>
-<button class="btn-primary" style="flex:1; background:#4f46e5;" onclick="printDocument('INV')">🧾 Print Invoice</button>
-<button class="btn-primary" style="flex:1; background:#0891b2;" onclick="printDocument('RCPT')">💵 Print Receipt</button>
+<div style="display:flex; gap:6px;">
+  <button class="btn-copy" style="flex:1;" onclick="copyText('customerText')">📋 Copy Quote</button>
+  <button class="btn-wa" style="flex:1;" onclick="sendWhatsappToCustomer('customerText')">📱 WhatsApp Cust</button>
 </div>
+${conditionalButtonsHTML}
 </div>
 `;
 
@@ -405,8 +486,8 @@ function copyText(id) {
 const textArea = document.getElementById(id);
 textArea.select();
 navigator.clipboard.writeText(textArea.value)
-.then(() => alert("Text copied!"))
-.catch(() => alert("Copy failed. Sila copy manual."));
+.then(() => alert("Text berjaya disalin!"))
+.catch(() => alert("Gagal menyalin text. Sila salin manual."));
 }
  
 function sendWhatsapp(id) {
@@ -425,6 +506,63 @@ window.open("https://wa.me/" + clean + "?text=" + encodeURIComponent(text), "_bl
 function toggleDarkMode() {
 document.body.classList.toggle("dark");
 }
+
+// --- FUNGSI CARIAN REKOD DARI GOOGLE SHEET ---
+async function searchRecord() {
+  const searchInput = document.getElementById("searchQt").value.trim();
+  if (!searchInput) {
+    alert("Sila masukkan No Quotation!");
+    return;
+  }
+  
+  const btn = document.querySelector("button[onclick='searchRecord()']");
+  btn.innerText = "⏳ Mencari...";
+  btn.disabled = true;
+  
+  try {
+    const url = WEBAPP_URL + "?action=search&qtNo=" + encodeURIComponent(searchInput);
+    const response = await fetch(url);
+    const result = await response.json();
+    
+    if (result.status === 'success') {
+      const data = result.data;
+      
+      document.getElementById("quoteNo").value = data.qtNo;
+      document.getElementById("customerName").value = data.customerName;
+      document.getElementById("phone").value = data.phone;
+      document.getElementById("address").value = data.address;
+      document.getElementById("pic").value = data.pic;
+      document.getElementById("unit").value = data.unit;
+      document.getElementById("days").value = data.days;
+      document.getElementById("rental").value = data.rental;
+      document.getElementById("deposit").value = data.deposit;
+      document.getElementById("transport").value = data.transport || 0;
+      document.getElementById("transportType").value = data.transportType || "tambah";
+      
+      if (data.startDate) {
+        const dateObj = new Date(data.startDate);
+        if (!isNaN(dateObj.getTime())) {
+          const yyyy = dateObj.getFullYear();
+          const mm = String(dateObj.getMonth() + 1).padStart(2, '0');
+          const dd = String(dateObj.getDate()).padStart(2, '0');
+          document.getElementById("startDate").value = `${yyyy}-${mm}-${dd}`;
+        }
+      }
+      
+      isSearchedFromDb = true; 
+      calculate(); 
+      alert("✅ Data berjaya dimuatkan! Butang Invoice & Receipt kini aktif di bawah.");
+    } else {
+      alert("❌ " + result.message);
+    }
+  } catch (error) {
+    console.error("Search Error:", error);
+    alert("❌ Gagal berhubung dengan database. Pastikan Web App menyokong GET request.");
+  } finally {
+    btn.innerText = "Cari Job";
+    btn.disabled = false;
+  }
+}
  
 async function saveRecord() {
 const btn = document.querySelector("button[onclick='saveRecord()']");
@@ -434,6 +572,9 @@ try {
 const quoteNo = document.getElementById("quoteNo").value;
 const rental = parseFloat(document.getElementById("rental").value) || 0;
 const deposit = parseFloat(document.getElementById("deposit").value) || 0;
+const transport = parseFloat(document.getElementById("transport").value) || 0;
+const transportType = document.getElementById("transportType").value;
+const startDate = document.getElementById("startDate").value;
  
 const data = {
 jobId: quoteNo.replace("QT-",""),
@@ -445,9 +586,12 @@ phone: document.getElementById("phone").value,
 address: document.getElementById("address").value,
 unit: document.getElementById("unit").value,
 days: document.getElementById("days").value,
+startDate: startDate, 
+transport: transport, 
+transportType: transportType, // Menyimpan status pilihan ke db
 rental: rental,
 deposit: deposit,
-balance: rental - deposit,
+balance: (transportType === "tambah" ? rental + transport : rental) - deposit,
 status: "Quoted",
 pic: document.getElementById("pic").value
 };
@@ -457,18 +601,18 @@ method: "POST",
 mode: "no-cors",
 headers: { 
 "Content-Type": "application/json",
-"X-App-Token": "MKS-SECURE-2026" // Basic protection verification header
+"X-App-Token": "MKS-SECURE-2026"
 },
 body: JSON.stringify(data)
 });
  
 alert("🎉 Job successfully saved to Google Sheet!");
-localStorage.removeItem(STORAGE_KEY); // Clean local state once submitted safely
+localStorage.removeItem(STORAGE_KEY);
 } catch (error) {
 console.error("Error saving record:", error);
 alert("❌ Failed to save job. Check console for details.");
 } finally {
-if (btn) { btn.disabled = false; btn.innerText = "💾 Save Job to Google Sheet"; }
+if (btn) { btn.disabled = false; btn.innerText = "💾 Save Job"; }
 }
 }
  
@@ -489,9 +633,12 @@ const days = Number(document.getElementById("days").value || 0);
 const startDate = document.getElementById("startDate").value;
 const rental = Number(document.getElementById("rental").value || 0);
 const transport = Number(document.getElementById("transport").value || 0);
+const transportType = document.getElementById("transportType").value;
 const deposit = Number(document.getElementById("deposit").value || 0);
 
-const grandTotal = rental + transport;
+// Penyelarasan amaun untuk cetakan dokumen rasmi
+const displayTransport = (transportType === "tambah") ? transport : 0;
+const grandTotal = rental + displayTransport;
 const balanceDue = grandTotal - deposit;
  
 const today = new Date().toLocaleDateString("ms-MY", { day: "2-digit", month: "2-digit", year: "numeric" });
@@ -500,10 +647,9 @@ const endDateObj = startDate ? new Date(startDate) : null;
 if (endDateObj) { endDateObj.setDate(endDateObj.getDate() + days - 1); }
 const endDateText = endDateObj ? endDateObj.toLocaleDateString("ms-MY", { day: "2-digit", month: "2-digit", year: "numeric" }) : "-";
  
-// Dynamically compute lower financial structures based on doc type
 let financialBoxHTML = `
 <div class="flex justify-between"><span class="text-gray-600">Total Rental</span><span class="font-medium">RM ${rental.toFixed(2)}</span></div>
-<div class="flex justify-between"><span class="text-gray-600">Transport Cost</span><span class="font-medium">RM ${transport.toFixed(2)}</span></div>
+<div class="flex justify-between"><span class="text-gray-600">Transport Cost</span><span class="font-medium">RM ${displayTransport.toFixed(2)} ${transportType === 'absorb' && transport > 0 ? '(Absorb)' : ''}</span></div>
 <div class="flex justify-between border-t-2 border-blue-200 pt-2"><span class="font-bold text-blue-900">Grand Total</span><span class="font-bold text-blue-900">RM ${grandTotal.toFixed(2)}</span></div>
 `;
 
@@ -589,7 +735,7 @@ body { font-family: 'DM Sans', sans-serif; background: #f1f5f9; padding: 24px; c
 <td class="py-3 px-2 text-gray-800">Kos Transport / Penghantaran & Pemasangan</td>
 <td class="py-3 px-2 text-center text-gray-800">1</td>
 <td class="py-3 px-2 text-right text-gray-800">-</td>
-<td class="py-3 px-2 text-right text-gray-800">RM ${transport.toFixed(2)}</td>
+<td class="py-3 px-2 text-right text-gray-800">RM ${displayTransport.toFixed(2)}</td>
 </tr>
 </tbody>
 </table>
