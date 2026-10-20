@@ -756,10 +756,13 @@ ${financialBoxHTML}
 <footer class="border-t border-gray-100 pt-4 text-xs flex justify-between items-end">
 <div>
 <p class="font-medium mb-0.5 text-gray-700">Payment Status</p>
-<p class="text-gray-500">${type === 'RCPT' ? 'Paid / Documented' : 'Pending Verification / Receipt Settlement'}</p>
+<p class="text-gray-500 font-bold ${type === 'RCPT' ? 'text-green-600' : 'text-amber-600'}">
+  ${type === 'RCPT' ? 'PAID (LUNAS)' : 'Pending Verification / Receipt Settlement'}
+</p>
 </div>
 <p class="text-gray-400 italic font-medium">Terima Kasih Dari Mat Kipas Sejuk</p>
 </footer>
+
 </div>
 </main>
 </body>
