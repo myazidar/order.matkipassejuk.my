@@ -218,7 +218,8 @@ h2 { font-size: 18px; font-weight: 700; margin: 0 0 16px 0; }
 <div class="flex-row">
 <div>
 <label>Deposit Diterima (RM)</label>
-<input type="number" id="deposit" value="0" oninput="saveToMemory()">
+<input type="number" id="deposit" value="0"
+       oninput="calculate(); saveToMemory()">
 </div>
 <div>
 <label>Kos Transport (RM)</label>
