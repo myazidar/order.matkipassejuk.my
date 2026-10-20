@@ -658,12 +658,20 @@ financialBoxHTML += `
 <div class="flex justify-between text-gray-600"><span>Paid (Deposit)</span><span>- RM ${deposit.toFixed(2)}</span></div>
 <div class="flex justify-between border-t-2 border-red-200 pt-2 text-red-700"><span class="font-bold">Balance Due</span><span class="font-bold">RM ${balanceDue.toFixed(2)}</span></div>
 `;
+
 } else if (type === 'RCPT') {
-financialBoxHTML = `
-<div class="flex justify-between text-green-700 bg-green-50 p-2 rounded border border-green-200"><span class="font-bold">Amount Paid</span><span class="font-bold">RM ${deposit.toFixed(2)}</span></div>
-<div class="flex justify-between pt-2 text-xs text-gray-500"><span>Remaining Outstanding</span><span>RM ${balanceDue.toFixed(2)}</span></div>
-`;
+  financialBoxHTML = `
+  <div class="flex justify-between text-green-700 bg-green-50 p-2 rounded border border-green-200">
+    <span class="font-bold">Amount Received</span>
+    <span class="font-bold">RM ${deposit.toFixed(2)}</span>
+  </div>
+  <div class="flex justify-between pt-2 text-xs text-gray-500">
+    <span>Payment Reference</span>
+    <span>${docNo}</span>
+  </div>
+  `;
 }
+
 
 const printWindow = window.open("", "_blank");
 printWindow.document.write(`
@@ -757,7 +765,9 @@ ${financialBoxHTML}
 <div>
 <p class="font-medium mb-0.5 text-gray-700">Payment Status</p>
 <p class="text-gray-500 font-bold ${type === 'RCPT' ? 'text-green-600' : 'text-amber-600'}">
-  ${type === 'RCPT' ? 'PAID (LUNAS)' : 'Pending Verification / Receipt Settlement'}
+  ${type === 'RCPT'
+  ? (balanceDue <= 0 ? 'PAID (LUNAS)' : 'PAYMENT RECEIVED')
+  : 'Pending Verification / Receipt Settlement'}
 </p>
 </div>
 <p class="text-gray-400 italic font-medium">Terima Kasih Dari Mat Kipas Sejuk</p>
