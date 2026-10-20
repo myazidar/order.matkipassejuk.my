@@ -660,18 +660,16 @@ financialBoxHTML += `
 <div class="flex justify-between border-t-2 border-red-200 pt-2 text-red-700"><span class="font-bold">Balance Due</span><span class="font-bold">RM ${balanceDue.toFixed(2)}</span></div>
 `;
 
+
 } else if (type === 'RCPT') {
   financialBoxHTML = `
   <div class="flex justify-between text-green-700 bg-green-50 p-2 rounded border border-green-200">
     <span class="font-bold">Amount Received</span>
-    <span class="font-bold">RM ${deposit.toFixed(2)}</span>
-  </div>
-  <div class="flex justify-between pt-2 text-xs text-gray-500">
-    <span>Payment Reference</span>
-    <span>${docNo}</span>
+    <span class="font-bold">RM ${grandTotal.toFixed(2)}</span>
   </div>
   `;
 }
+
 
 
 const printWindow = window.open("", "_blank");
